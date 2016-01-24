@@ -1,0 +1,25 @@
+main: before
+    func: 0
+main: after 10
+main: before
+    func: 1
+main: after 20
+main: before
+    func: 2
+main: after 30
+main: before
+    func: 3
+main: after 40
+main: before
+    func: 4
+main: after 0
+main: before
+main: after 0
+main: before
+main: after 0
+main: before
+main: after 0
+main: before
+main: after 0
+main: before
+main: after 0

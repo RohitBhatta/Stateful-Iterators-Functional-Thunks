@@ -1,0 +1,19 @@
+Read about the following and explain how they relate (or not) to p7
+
+- setjmp/longjmp
+
+- continuations
+
+- coroutines
+
+- go-routines
+
+- Python generators
+
+- closures
+
+- Partial evaluation
+
+- Lazy streams
+
+- Threads
