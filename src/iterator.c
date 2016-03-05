@@ -17,47 +17,50 @@ struct Iterator {
 static Iterator* current = 0;
 static Iterator* caller = 0;
 static long res = 0;
-//static int count = 0;
  
 static void deadlock(void) {
     printf("deadlock\n");
     exit(0);
 }
 
-//Store return value of F0
-//Original argument was void
 static void entry(void) {
-    //MISSING(4);
+    //Store return value
     long funcRet = (current -> func)();
+
+    //Yield and infinite stream of the function's return value
     while (1) {
         yield(funcRet);
     }
 }
 
 Iterator* newIterator(F0 func) {
-    //MISSING(7);
     Iterator* iter = (Iterator*) malloc(sizeof(Iterator));
     iter -> func = func;
     iter -> waiting = 0;
+    //Pass control over to entry
     iter -> stack[STACK_LONGS - 1] = (long) &(entry);
+    //Point the stack pointer to 6 above the last element
     iter -> sp = &(iter -> stack[STACK_LONGS - 1]) - 6;
     return iter;
 }
 
 long next(Iterator* p) {
-    //MISSING(20);
+    //Checks if the function has a caller
     if (current == NULL) {
-        current = newIterator(next);
+        current = newIterator(0);
     }
 
+    //Check for deadlock
     if (p -> waiting == 0) {
         p -> waiting = 1;
+        //Set temporary iterators
         Iterator* callerTemp = caller;
         Iterator* currentTemp = current;
         caller = current;
         current = p;
         doSomething(current -> sp, &(caller -> sp));
         p -> waiting = 0;
+        //Reset original iterators
         caller = callerTemp;
         current = currentTemp;
     }
@@ -69,7 +72,6 @@ long next(Iterator* p) {
 }
 
 void yield(long v) {
-    //MISSING(2);
     res = v;
     doSomething(caller -> sp, &(current -> sp));
 }
