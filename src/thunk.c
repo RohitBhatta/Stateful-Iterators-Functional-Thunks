@@ -32,5 +32,10 @@ static uint8_t* xalloc() {
 F0 thunk1(F1 f, long a0) {
      uint8_t* p = xalloc();
      //MISSING(15);
+     //move something to rdi
+     //mov a0 to rdi
+     //move something to rax
+     //mov f to rax
+     //jump to rax
      return (F0)p;
 }

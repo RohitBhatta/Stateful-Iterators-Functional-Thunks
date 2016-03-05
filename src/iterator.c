@@ -40,19 +40,15 @@ Iterator* newIterator(F0 func) {
     iter -> func = func;
     iter -> waiting = 0;
     iter -> stack[STACK_LONGS - 1] = (long) &(entry);
-    iter -> sp = (long*) (STACK_LONGS - 7);
+    iter -> sp = &(iter -> stack[STACK_LONGS - 1]) - 6;
     return iter;
 }
 
 long next(Iterator* p) {
     //MISSING(20);
-    //Have dummy iterator
-    /*if (!count) {
-        count++;
-        Iterator* currentFirst = (Iterator*) malloc(sizeof(Iterator));
-        //How to set current sp???
-        current = currentFirst;
-    }*/
+    if (current == NULL) {
+        current = newIterator(next);
+    }
 
     if (p -> waiting == 0) {
         p -> waiting = 1;
@@ -61,6 +57,7 @@ long next(Iterator* p) {
         caller = current;
         current = p;
         doSomething(current -> sp, &(caller -> sp));
+        p -> waiting = 0;
         caller = callerTemp;
         current = currentTemp;
     }
