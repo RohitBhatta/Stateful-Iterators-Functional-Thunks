@@ -1,6 +1,6 @@
 	.global doSomething
 	.global _doSomething
-	/* void doSomething(long newSp, long *oldSp) */
+	//void doSomething(long *newSp, long **oldSp)
 doSomething:
 _doSomething:
 	push %rbx
@@ -20,4 +20,3 @@ _doSomething:
 	pop %rbp
 	pop %rbx
 	ret
-

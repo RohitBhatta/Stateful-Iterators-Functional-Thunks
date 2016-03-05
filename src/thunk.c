@@ -31,6 +31,6 @@ static uint8_t* xalloc() {
 
 F0 thunk1(F1 f, long a0) {
      uint8_t* p = xalloc();
-     MISSING(15);
+     //MISSING(15);
      return (F0)p;
 }
