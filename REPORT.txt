@@ -1,19 +1,33 @@
+Citations:
+Krzysztof explained the concept of the entry function to me and its relationship to the other functions.
+Yasmine explained how to use objdump to transfer my assembly to machine language.
+Avilash provided an interesting way to be able to store the long a0 and function in the array p[].
+
 Read about the following and explain how they relate (or not) to p7
 
 - setjmp/longjmp
+Setjmp() & longjmp() are subroutines that allow the programmer command the control flow of the C program. These subroutines are usually used so that if an error is detected within a long string of procedure calls, the error can be dealed with efficiently by jumping out of the procedure that catches the error. This method is similar to doing a try/catch statement in Java or C++. This is related to deadlock in how if deadlock is detected, we immediately print "deadlock" and exit.
 
 - continuations
+A continuation is an abstract representation of the control state of a computer program. Continuations are useful for encoding other control mechanisms in programming languages such as exceptions, generators, coroutines, and so on. Languages need continuations to be able to completely control the execution order of instruction.
 
 - coroutines
+Coroutines are computer program components that generalize subroutines for nonpreemptive multitasking, by allowing multiple entry points for suspending and resuming execution at certain locations. They are well-suited for implementing more famililar program components such as cooperative tasks, exceptions, even loop, iterators, infinite lists, and pipes. Project p7 is based on the idea of iterators and suspending and resuming execution of functions at particular spots as in coroutines.
 
 - go-routines
+A goroutine is a function that is capable of running concurrently with other functions. In other words, it is a lightweight thread of execution. They run in the same address space, so access to shared memory must be synchronized. This is similar to what we have to do with switching between multiple points in our program to simulate the effect of our program containing concurrently running functions.
 
 - Python generators
+Generators functions allow one to declare a function that behaves like an iterator (it can be used in a for loop). It is defined like a normal function, but whenever it needs to generate a value, it does so with the yield keyword rather than return. If the body of a function contains yield, the function automatically becomes a generator function, even if it also contains a return statement. These python generators were basically the functions that were passed in when one called next(function) in the test cases.
 
 - closures
+Closers are functions (used in JavaScript) that refer to independent or free variables. In other words, the function defined in the closure remembers the environment in which it was created. We are essentially doing this in p7 because we have to remember the state we were in previously before we jump into the new function.
 
 - Partial evaluation
+Partial evaluation is a technique for several different types of program optimization by specialization. The most straightforward application is to produce new programs which run faster than the originals while being guaranteed to behave in the same way. The static and dynamic input is mapped to an output. In this way, partial evaluation is similar to thunks in p7 in that F1 was transformed into F0 because F0 ran faster and guaranteed the same behavior because it contained F1's argument.
 
 - Lazy streams
+Streams are lazy types whose values are determined by suspended computations that generate the next element of the stream. The keyword "lazy" indicates that one is defining a value of a lazy type, which means that it must be kept as an incomplete computation, rather than fully evaluated at the time the binding is created. This part has to do with our entry() function. The entry() function lazily generates and infinite stream of the return value of the current function by using an infinite while loop and calling yield within it.
 
 - Threads
+A thread is an independent set of values for the processor registers. It includes the program counter and controls what executes in what order. It also includes the stack pointer, which points to a unique area of memory for each thread so multiple threads do not interfere with each other. Threads are the software unit affected by control flow(ex: function call, loop, goto), because those instructions operate on the program counter, and that belongs to a specific thread. Multithreading gives the illusion of doing multiple computations at the same time, while in fact it is spending a bit of time on each computation and switching frequently. We kind of simulate this with p7 by jumping around when next or yield is called. We lie to the user and pretend that we are running concurrent functions, but instead we are switching between functions and evaluating bits of each function.
